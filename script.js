@@ -377,45 +377,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 10. Bússola do hero: gira num sentido, reverte suavemente e volta, sem nunca passar da borda esquerda da tela
+// 10. Bússola do hero: balanço seguro adaptativo sem bugs no Vercel
   const compassImg = document.querySelector('.hero__compass');
   if (compassImg) {
-    // >>> findSafeSwing
-    // points: [x, y, x, y...] dos pixels visíveis, relativos ao centro da imagem (px de layout).
-    // cx: posição x do centro na tela. Devolve a maior faixa de ângulos (graus) sem corte, ou null.
-    const findSafeSwing = (points, cx, margin) => {
-      const far = [];
-      for (let k = 0; k < points.length; k += 2) {
-        if (Math.hypot(points[k], points[k + 1]) >= cx - margin) far.push(points[k], points[k + 1]);
+    const updateCompassSwing = () => {
+      const screenWidth = window.innerWidth;
+      let fromDeg = -22;
+      let toDeg = 22;
+      let duration = '16s';
+
+      // Ajusta o limite do balanço de acordo com a largura da tela para nunca vazar a borda esquerda
+      if (screenWidth < 768) {
+        fromDeg = -10;
+        toDeg = 15;
+        duration = '12s';
+      } else if (screenWidth < 1200) {
+        fromDeg = -18;
+        toDeg = 18;
+        duration = '15s';
       }
-      if (!far.length) return null;
-      const STEP = 2;
-      const N = 360 / STEP;
-      const cut = [];
-      for (let i = 0; i < N; i++) {
-        const a = (i * STEP * Math.PI) / 180;
-        const cos = Math.cos(a);
-        const sin = Math.sin(a);
-        let n = 0;
-        for (let k = 0; k < far.length; k += 2) {
-          if (cx + far[k] * cos - far[k + 1] * sin < margin) n++; // rotação horária, como no CSS
-        }
-        cut.push(n);
-      }
-      const min = Math.min(...cut);
-      const limit = min + Math.max(2, min * 0.08);
-      const ok = cut.map((n) => n <= limit);
-      if (ok.every(Boolean)) return null;
-      let best = { len: 0, start: 0 };
-      for (let i = 0; i < N; i++) {
-        if (!ok[i] || ok[(i - 1 + N) % N]) continue;
-        let len = 0;
-        while (ok[(i + len) % N] && len < N) len++;
-        if (len > best.len) best = { len, start: i };
-      }
-      if (!best.len) return null;
-      return { from: best.start * STEP, to: (best.start + best.len - 1) * STEP };
+
+      compassImg.style.setProperty('--compass-from', `${fromDeg}deg`);
+      compassImg.style.setProperty('--compass-to', `${toDeg}deg`);
+      compassImg.style.setProperty('--compass-dur', duration);
     };
+
+    updateCompassSwing();
+    window.addEventListener('resize', updateCompassSwing);
+  }
     // <<< findSafeSwing
 
     const calibrateCompass = () => {
@@ -467,4 +456,4 @@ document.addEventListener('DOMContentLoaded', () => {
       compassTimer = setTimeout(startCompass, 250);
     });
   }
-});
+);
