@@ -149,17 +149,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100 + (index * 100));
   });
 
-  // 6. Galeria em barras (hover expande a barra; setas passam as imagens)
+  // 6. Galeria em barras (hover expande a barra; aviso após um tempo; clique abre a imagem completa)
   const bars = document.querySelector('[data-gallery]');
   if (bars) {
     const items = [...bars.querySelectorAll('.gallery__bar')];
     const prev = document.querySelector('[data-gallery-prev]');
     const next = document.querySelector('[data-gallery-next]');
+    const lightbox = document.querySelector('#lightbox');
+    const lbImage = lightbox && lightbox.querySelector('[data-lightbox-image]');
+    const HINT_DELAY = 200; // tempo (ms) com o mouse sobre a barra até aparecer o aviso
     let start = 0;
     let lastView = 0;
+    let active = null;
+    let hintTimer;
+    let tapWasOpen = true;
 
     const perView = () => parseInt(getComputedStyle(bars).getPropertyValue('--visible'), 10) || 5;
     const open = (el) => items.forEach((item) => item.classList.toggle('is-open', item === el));
+    const clearHint = () => {
+      clearTimeout(hintTimer);
+      items.forEach((item) => item.classList.remove('is-hinting'));
+    };
+    const activate = (bar, delay = HINT_DELAY) => {
+      if (bar === active) return;
+      active = bar;
+      open(bar);
+      clearHint();
+      hintTimer = setTimeout(() => bar.classList.add('is-hinting'), delay);
+    };
+    const rest = () => {
+      active = null;
+      clearHint();
+      open(items[start]); // estado de repouso: primeira barra aberta, sem aviso
+    };
 
     const render = () => {
       lastView = perView();
@@ -168,26 +190,73 @@ document.addEventListener('DOMContentLoaded', () => {
       items.forEach((el, i) => { el.hidden = i < start || i >= start + lastView; });
       prev.disabled = start === 0;
       next.disabled = start >= max;
-      open(items[start]); // estado de repouso: primeira barra aberta
+      rest();
     };
+
+    // --- Lightbox ---
+    const openLightbox = (bar) => {
+      if (!lightbox) return;
+      const img = bar.querySelector('img');
+      lbImage.src = bar.dataset.full || img.currentSrc || img.src; // data-full: versão em alta, se houver
+      lbImage.alt = bar.getAttribute('aria-label') || '';
+      clearHint();
+      const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.paddingRight = scrollbar ? `${scrollbar}px` : '';
+      document.documentElement.classList.add('is-locked');
+      lightbox.showModal();
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox || !lightbox.open || lightbox.classList.contains('is-closing')) return;
+      lightbox.classList.add('is-closing');
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        lightbox.classList.remove('is-closing');
+        lightbox.close();
+      };
+      lightbox.addEventListener('animationend', finish, { once: true });
+      setTimeout(finish, 400);
+      if (getComputedStyle(lightbox).animationName === 'none') finish(); // sem animação (reduzir movimento)
+    };
+
+    if (lightbox) {
+      lightbox.querySelector('[data-lightbox-close]').addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      lightbox.addEventListener('cancel', (e) => { e.preventDefault(); closeLightbox(); }); // Esc
+      lightbox.addEventListener('close', () => {
+        document.documentElement.classList.remove('is-locked');
+        document.documentElement.style.paddingRight = '';
+        lbImage.removeAttribute('src');
+      });
+    }
 
     prev.addEventListener('click', () => { start -= 1; render(); });
     next.addEventListener('click', () => { start += 1; render(); });
 
     bars.addEventListener('pointerover', (e) => {
       const bar = e.target.closest('.gallery__bar');
-      if (bar && e.pointerType !== 'touch') open(bar);
+      if (bar && e.pointerType !== 'touch') activate(bar);
     });
     bars.addEventListener('pointerleave', (e) => {
-      if (e.pointerType !== 'touch') open(items[start]);
+      if (e.pointerType !== 'touch') rest();
     });
     bars.addEventListener('focusin', (e) => {
       const bar = e.target.closest('.gallery__bar');
-      if (bar) open(bar);
+      if (bar && e.target.matches(':focus-visible')) activate(bar); // só foco por teclado
+    });
+    bars.addEventListener('pointerdown', (e) => {
+      const bar = e.target.closest('.gallery__bar');
+      // no toque: 1º toque expande a barra, 2º toque abre a imagem
+      tapWasOpen = !bar || e.pointerType !== 'touch' || bar.classList.contains('is-open');
     });
     bars.addEventListener('click', (e) => {
       const bar = e.target.closest('.gallery__bar');
-      if (bar) open(bar); // toque no celular
+      if (!bar) return;
+      if (tapWasOpen) openLightbox(bar);
+      else activate(bar, 900);
+      tapWasOpen = true;
     });
     window.addEventListener('resize', () => { if (perView() !== lastView) render(); });
     render();
@@ -261,6 +330,141 @@ document.addEventListener('DOMContentLoaded', () => {
       } finally {
         submit.disabled = false;
       }
+    });
+  }
+
+  // 9. Menu hambúrguer (sidebar)
+  const drawer = document.querySelector('#mobile-menu');
+  const menuButton = document.querySelector('[data-menu-open]');
+  if (drawer && menuButton) {
+    const lockScroll = (on) => {
+      const root = document.documentElement;
+      const scrollbar = window.innerWidth - root.clientWidth;
+      root.style.paddingRight = on && scrollbar ? `${scrollbar}px` : '';
+      root.classList.toggle('is-locked', on);
+    };
+
+    const closeDrawer = () => {
+      if (!drawer.open || drawer.classList.contains('is-closing')) return;
+      drawer.classList.add('is-closing');
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        drawer.classList.remove('is-closing');
+        drawer.close();
+      };
+      drawer.addEventListener('animationend', (e) => {
+        if (e.target === drawer && e.animationName === 'drawerOut') finish();
+      });
+      setTimeout(finish, 450);
+    };
+
+    menuButton.addEventListener('click', () => {
+      lockScroll(true);
+      drawer.showModal();
+      menuButton.setAttribute('aria-expanded', 'true');
+    });
+    drawer.querySelectorAll('[data-menu-close]').forEach((el) => el.addEventListener('click', closeDrawer));
+    drawer.addEventListener('click', (e) => { if (e.target === drawer) closeDrawer(); });
+    drawer.addEventListener('cancel', (e) => { e.preventDefault(); closeDrawer(); }); // Esc
+    drawer.addEventListener('close', () => {
+      lockScroll(false);
+      menuButton.setAttribute('aria-expanded', 'false');
+    });
+    window.matchMedia('(min-width: 1025px)').addEventListener('change', (e) => {
+      if (e.matches && drawer.open) drawer.close();
+    });
+  }
+
+  // 10. Bússola do hero: gira num sentido, reverte suavemente e volta, sem nunca passar da borda esquerda da tela
+  const compassImg = document.querySelector('.hero__compass');
+  if (compassImg) {
+    // >>> findSafeSwing
+    // points: [x, y, x, y...] dos pixels visíveis, relativos ao centro da imagem (px de layout).
+    // cx: posição x do centro na tela. Devolve a maior faixa de ângulos (graus) sem corte, ou null.
+    const findSafeSwing = (points, cx, margin) => {
+      const far = [];
+      for (let k = 0; k < points.length; k += 2) {
+        if (Math.hypot(points[k], points[k + 1]) >= cx - margin) far.push(points[k], points[k + 1]);
+      }
+      if (!far.length) return null;
+      const STEP = 2;
+      const N = 360 / STEP;
+      const cut = [];
+      for (let i = 0; i < N; i++) {
+        const a = (i * STEP * Math.PI) / 180;
+        const cos = Math.cos(a);
+        const sin = Math.sin(a);
+        let n = 0;
+        for (let k = 0; k < far.length; k += 2) {
+          if (cx + far[k] * cos - far[k + 1] * sin < margin) n++; // rotação horária, como no CSS
+        }
+        cut.push(n);
+      }
+      const min = Math.min(...cut);
+      const limit = min + Math.max(2, min * 0.08);
+      const ok = cut.map((n) => n <= limit);
+      if (ok.every(Boolean)) return null;
+      let best = { len: 0, start: 0 };
+      for (let i = 0; i < N; i++) {
+        if (!ok[i] || ok[(i - 1 + N) % N]) continue;
+        let len = 0;
+        while (ok[(i + len) % N] && len < N) len++;
+        if (len > best.len) best = { len, start: i };
+      }
+      if (!best.len) return null;
+      return { from: best.start * STEP, to: (best.start + best.len - 1) * STEP };
+    };
+    // <<< findSafeSwing
+
+    const calibrateCompass = () => {
+      const w = compassImg.offsetWidth;
+      const h = compassImg.offsetHeight;
+      if (!w || !h || !compassImg.naturalWidth) return;
+      const cw = 400;
+      const ch = Math.round((cw * compassImg.naturalHeight) / compassImg.naturalWidth);
+      const canvas = document.createElement('canvas');
+      canvas.width = cw;
+      canvas.height = ch;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(compassImg, 0, 0, cw, ch);
+      let data;
+      try {
+        data = ctx.getImageData(0, 0, cw, ch).data;
+      } catch (err) {
+        return; // leitura de pixels bloqueada (ex.: abrindo por file://): mantém o vai e volta padrão do CSS
+      }
+      const points = [];
+      for (let y = 0; y < ch; y++) {
+        for (let x = 0; x < cw; x++) {
+          if (data[(y * cw + x) * 4 + 3] > 8) points.push((x + 0.5 - cw / 2) * (w / cw), (y + 0.5 - ch / 2) * (h / ch));
+        }
+      }
+      if (points.length > cw * ch) return; // imagem sem transparência: não dá para calibrar
+
+      const swing = findSafeSwing(points, compassImg.offsetLeft + w / 2, 6);
+      if (!swing) {
+        compassImg.style.animation = 'spinCompass 60s linear infinite'; // nada é cortado: giro completo original
+        return;
+      }
+      const inset = Math.min(6, (swing.to - swing.from) / 4);
+      const from = swing.from + inset;
+      const to = swing.to - inset;
+      compassImg.style.animation = '';
+      compassImg.style.setProperty('--compass-from', `${from}deg`);
+      compassImg.style.setProperty('--compass-to', `${to}deg`);
+      compassImg.style.setProperty('--compass-dur', `${Math.min(40, Math.max(10, (to - from) / 5)).toFixed(1)}s`);
+    };
+
+    const startCompass = () => { if (compassImg.complete && compassImg.naturalWidth) calibrateCompass(); };
+    if (compassImg.complete) startCompass();
+    else compassImg.addEventListener('load', startCompass);
+    let compassTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(compassTimer);
+      compassTimer = setTimeout(startCompass, 250);
     });
   }
 });
