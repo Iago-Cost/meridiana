@@ -209,12 +209,12 @@ a:focus-visible {
 }
 
 .hero__compass {
-  animation: spinCompass 60s linear infinite;
+  animation: compassSwing var(--compass-dur, 18s) ease-in-out infinite alternate;
 }
 
-@keyframes spinCompass {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes compassSwing {
+  from { transform: rotate(var(--compass-from, -15deg)); }
+  to { transform: rotate(var(--compass-to, 20deg)); }
 }
 
 /* --- Original Structure with Enhancements --- */
