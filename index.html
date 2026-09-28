@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eadbd0">
+  <meta name="description" content="Meridiana — arquitetura pensada para orientar você em cada etapa do seu projeto.">
+  <title>Meridiana | Arquitetura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Ancizar+Serif:wght@300&family=Cormorant+Garamond:wght@400;500&family=Hanken+Grotesk:wght@300;400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Particles Container -->
+  <div class="particles-container" aria-hidden="true"></div>
+
+  <main>
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__wash" aria-hidden="true"></div>
+
+      <a class="hero__brand" href="#inicio" aria-label="Meridiana — início">
+        <img src="./img/Logo-v1.png" alt="">
+      </a>
+
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Navegação principal">
+          <a href="#inicio" class="nav-link">Início</a>
+          <a href="#sobre" class="nav-link">Sobre</a>
+          <a href="#galeria" class="nav-link">Galeria</a>
+          <a href="#pacotes" class="nav-link">Pacotes</a>
+          <a href="#contato" class="nav-link">Contato</a>
+        </nav>
+
+        <button class="cart-button" type="button" data-cart-open aria-haspopup="dialog" aria-controls="cart-dialog">
+          <svg viewBox="0 0 28 28" aria-hidden="true">
+            <path d="M2.5 4h3l2.6 12.1a2.3 2.3 0 0 0 2.3 1.8h10.7a2.3 2.3 0 0 0 2.2-1.6L26 8H7" />
+            <circle cx="11" cy="23" r="1.5" />
+            <circle cx="21" cy="23" r="1.5" />
+          </svg>
+          <span>Meu Carrinho</span>
+        </button>
+      </header>
+
+      <img class="hero__compass parallax-element" src="./img/Design sem nome (3) 1.png" alt="" aria-hidden="true" data-speed="-0.5">
+      <h1 class="hero__title">MERIDIANA</h1>
+
+      <a class="hero__scroll scroll-bounce" href="#sobre" aria-label="Rolar para a seção Sobre">
+        <span aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <section class="about wave-top" id="sobre" aria-labelledby="about-title">
+      <img class="about__background bg-animate" src="./img/pngtree-abstract-brown-wave-texture-captivating-transparent-background-pattern-and-wallpaper-overlay-png-image_11980370%201.png" alt="" aria-hidden="true" loading="lazy">
+      
+      <!-- Decorative Floating Elements for About -->
+      <div class="floating-decor decor-circle-1" aria-hidden="true"></div>
+      <div class="floating-decor decor-square-1" aria-hidden="true"></div>
+      <div class="about__meridian" aria-hidden="true"></div>
+
+      <div class="about__layout">
+        <img class="about__corner-mark" src="./img/Logo-v2%201.png" alt="" aria-hidden="true" data-reveal>
+        <img class="about__watermark" src="./img/Logo-v2%201.png" alt="" aria-hidden="true" data-reveal>
+        <div class="about__copy">
+          <h2 class="about__title" id="about-title">
+            <span class="about__eyebrow" data-reveal>Sobre a</span>
+            <span class="about__name" data-reveal>Meridiana</span>
+          </h2>
+          <div class="about__description">
+            <p data-reveal>Um <em class="about__hl">meridiano</em> é a linha de referência a partir da qual todo o resto se orienta. É esse o nosso papel: dar a você um <em class="about__hl">projeto sólido</em> para construir com confiança — sem os meses de espera e o orçamento aberto de um escritório tradicional.</p>
+            <p data-reveal>Somos um time de arquitetos que padronizou cada etapa do processo em pacotes claros. O mesmo cuidado técnico de sempre, entregue em uma <em class="about__hl">fração do tempo e do custo</em>.</p>
+          </div>
+        </div>
+        <div class="about__images">
+          <svg class="about__ring" viewBox="0 0 200 200" aria-hidden="true">
+            <circle class="ring ring--ticks" cx="100" cy="100" r="96" pathLength="120"/>
+            <circle class="ring ring--thin" cx="100" cy="100" r="88"/>
+            <circle class="ring ring--dots" cx="100" cy="100" r="80" pathLength="100"/>
+          </svg>
+          <img class="about__artwork" src="./img/Group%205.png" alt="Composição de ambientes Meridiana: uma sala de jantar em formato de losango e quatro imagens de uma sala de estar." width="729" height="732" loading="lazy" data-reveal>
+        </div>
+      </div>
+    
+      <div class="about__pillars">
+        <article class="pillar" data-reveal>
+          <svg class="pillar__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19"/><path d="M24 12v12l8 5"/></svg>
+          <span class="pillar__num">01</span>
+          <h3>Prazo em dias</h3>
+          <p>Do briefing à entrega do projeto em dias, e não em meses de espera.</p>
+        </article>
+        <article class="pillar" data-reveal style="--reveal-delay:140ms">
+          <svg class="pillar__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 26 26 6h15v15L21 41z"/><circle cx="33" cy="15" r="2.5"/></svg>
+          <span class="pillar__num">02</span>
+          <h3>Preço fechado</h3>
+          <p>Você sabe o valor antes de começar, sem orçamento aberto.</p>
+        </article>
+        <article class="pillar" data-reveal style="--reveal-delay:280ms">
+          <svg class="pillar__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="7" width="15" height="15"/><rect x="26" y="7" width="15" height="15"/><rect x="7" y="26" width="15" height="15"/><path d="M26 33.5h15M33.5 26v15"/></svg>
+          <span class="pillar__num">03</span>
+          <h3>Pacotes claros</h3>
+          <p>Cada etapa do processo padronizada em pacotes objetivos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="gallery section wave-top wave-top--alt" id="galeria" aria-labelledby="gallery-title">
+      <!-- Decorative Floating Elements for Gallery -->
+      <div class="floating-decor decor-circle-2" aria-hidden="true"></div>
+      <div class="floating-decor decor-square-2" aria-hidden="true"></div>
+
+      <p class="eyebrow">Espaços que inspiram</p>
+      <h2 id="gallery-title">Nossa <span class="shimmer-text">galeria</span></h2>
+      <div class="gallery__viewer">
+        <button class="gallery__arrow" type="button" data-gallery-prev aria-label="Imagens anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="gallery__bars" data-gallery role="group" aria-label="Galeria de projetos">
+          <button class="gallery__bar" type="button" aria-label="Sala integrada com sofá cinza e área de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-12.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de estar com madeira natural e iluminação aconchegante"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-25.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de jantar com mesa de vidro e cadeiras de madeira"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-16.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Cozinha contemporânea com marcenaria verde"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-18.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Cozinha integrada a uma sala de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-23.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala integrada com sofá cinza e área de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-12.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de estar com madeira natural e iluminação aconchegante"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-25.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de jantar com mesa de vidro e cadeiras de madeira"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-16.jpg" alt="" loading="lazy" draggable="false"></span></button>
+        </div>
+        <button class="gallery__arrow" type="button" data-gallery-next aria-label="Próximas imagens"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </section>
+
+    <section class="packages section wave-top" id="pacotes" aria-labelledby="packages-title">
+      <!-- Decorative Floating Elements for Packages -->
+      <div class="floating-decor decor-circle-3" aria-hidden="true"></div>
+      <div class="floating-decor decor-square-3" aria-hidden="true"></div>
+
+      <p class="eyebrow">Um projeto para cada momento</p>
+      <h2 id="packages-title">Nossos <span class="shimmer-text">pacotes</span></h2>
+      <div class="coming-soon" data-reveal>
+        <p class="coming-soon__title">Em breve<span class="coming-soon__dots" aria-hidden="true"><i>.</i><i>.</i><i>.</i></span></p>
+        <p class="coming-soon__text">Estamos preparando os pacotes de arquitetura express. Enquanto isso, fale com a gente pelo formulário abaixo.</p>
+        <a class="text-button" href="#contato">Falar com a Meridiana <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="contact section wave-top" id="contato" aria-labelledby="contact-title">
+      <div class="contact__layout">
+        <div class="contact__intro" data-reveal>
+          <p class="eyebrow">Fale com a gente</p>
+          <h2 id="contact-title">Vamos <span>conversar</span></h2>
+          <p class="contact__lead">Conte um pouco sobre o seu espaço e o que você imagina para ele. Retornamos o mais rápido possível.</p>
+          <ul class="contact__list">
+            <li><span>E-mail</span><a href="mailto:contato@meridiana.com.br">contato@meridiana.com.br</a></li>
+            <li><span>Telefone</span><a href="tel:+5511900000000">(11) 90000-0000</a></li>
+            <li><span>Horário</span>Seg. a sex., 9h às 18h</li>
+          </ul>
+        </div>
+
+        <!-- Troque o e-mail no action pelo e-mail que vai receber as mensagens -->
+        <form class="contact__form" data-contact-form action="https://formsubmit.co/contato@meridiana.com.br" method="POST" data-reveal style="--reveal-delay:140ms">
+          <input type="hidden" name="_subject" value="Novo contato pelo site Meridiana">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input class="form-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="field"><label for="c-nome">Nome</label><input id="c-nome" name="nome" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="c-tel">Telefone <small>(opcional)</small></label><input id="c-tel" name="telefone" type="tel" autocomplete="tel"></div>
+          <div class="field">
+            <label for="c-amb">Ambiente do projeto</label>
+            <select id="c-amb" name="ambiente" required>
+              <option value="" disabled selected>Selecione</option>
+              <option>Sala</option><option>Cozinha</option><option>Quarto</option><option>Banheiro</option><option>Área externa</option><option>Outro</option>
+            </select>
+          </div>
+          <div class="field field--full"><label for="c-msg">Mensagem</label><textarea id="c-msg" name="mensagem" rows="5" required></textarea></div>
+
+          <button class="contact__submit" type="submit"><span>Enviar mensagem</span><span aria-hidden="true">↗</span></button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer wave-top wave-top--alt">
+    <div class="site-footer__inner">
+      <div class="footer-col footer-col--brand">
+        <a class="footer-brand" href="#inicio"><img src="./img/Logo-v1.png" alt=""><span>MERIDIANA</span></a>
+        <p>Arquitetura express: projetos precisos, prazos de dias e preço fechado.</p>
+      </div>
+      <nav class="footer-col" aria-label="Navegação do rodapé">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#pacotes">Pacotes</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h3>Contato</h3>
+        <address>
+          <a href="mailto:contato@meridiana.com.br">contato@meridiana.com.br</a><br>
+          <a href="tel:+5511900000000">(11) 90000-0000</a><br>
+          Atendimento de seg. a sex., 9h às 18h
+        </address>
+        <ul class="footer-social">
+          <li><a href="#" aria-label="Instagram da Meridiana">Instagram ↗</a></li>
+          <li><a href="#" aria-label="Pinterest da Meridiana">Pinterest ↗</a></li>
+          <li><a href="#" aria-label="WhatsApp da Meridiana">WhatsApp ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p>© 2026 Meridiana Arquitetura. Todos os direitos reservados.</p>
+      <div class="footer-legal"><a href="#">Termos de uso</a><a href="#">Privacidade</a></div>
+      <a href="#inicio" class="back-to-top">Voltar ao início ↑</a>
+    </div>
+  </footer>
+
+  <dialog class="cart-dialog" id="cart-dialog" aria-labelledby="cart-title">
+    <div class="cart-dialog__header">
+      <h2 id="cart-title">Meu carrinho</h2>
+      <button class="cart-dialog__close" type="button" data-cart-close aria-label="Fechar carrinho">×</button>
+    </div>
+    <p class="cart-dialog__empty" data-cart-empty>Seu carrinho está vazio.</p>
+    <ul class="cart-dialog__items" data-cart-items></ul>
+    <a class="cart-dialog__browse" href="#pacotes" data-cart-close>Conhecer os pacotes</a>
+  </dialog>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
