@@ -38,13 +38,17 @@
           <a href="#contato" class="nav-link">Contato</a>
         </nav>
 
-        <button class="cart-button" type="button" data-cart-open aria-haspopup="dialog" aria-controls="cart-dialog">
+        <button class="cart-button" type="button" data-cart-open aria-label="Abrir carrinho" aria-haspopup="dialog" aria-controls="cart-dialog">
           <svg viewBox="0 0 28 28" aria-hidden="true">
             <path d="M2.5 4h3l2.6 12.1a2.3 2.3 0 0 0 2.3 1.8h10.7a2.3 2.3 0 0 0 2.2-1.6L26 8H7" />
             <circle cx="11" cy="23" r="1.5" />
             <circle cx="21" cy="23" r="1.5" />
           </svg>
           <span>Meu Carrinho</span>
+        </button>
+
+        <button class="menu-toggle" type="button" data-menu-open aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
         </button>
       </header>
 
@@ -65,8 +69,6 @@
       <div class="about__meridian" aria-hidden="true"></div>
 
       <div class="about__layout">
-        <img class="about__corner-mark" src="./img/Logo-v2%201.png" alt="" aria-hidden="true" data-reveal>
-        <img class="about__watermark" src="./img/Logo-v2%201.png" alt="" aria-hidden="true" data-reveal>
         <div class="about__copy">
           <h2 class="about__title" id="about-title">
             <span class="about__eyebrow" data-reveal>Sobre a</span>
@@ -119,14 +121,14 @@
       <div class="gallery__viewer">
         <button class="gallery__arrow" type="button" data-gallery-prev aria-label="Imagens anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
         <div class="gallery__bars" data-gallery role="group" aria-label="Galeria de projetos">
-          <button class="gallery__bar" type="button" aria-label="Sala integrada com sofá cinza e área de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-12.jpg" alt="" loading="lazy" draggable="false"></span></button>
-          <button class="gallery__bar" type="button" aria-label="Sala de estar com madeira natural e iluminação aconchegante"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-25.jpg" alt="" loading="lazy" draggable="false"></span></button>
-          <button class="gallery__bar" type="button" aria-label="Sala de jantar com mesa de vidro e cadeiras de madeira"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-16.jpg" alt="" loading="lazy" draggable="false"></span></button>
-          <button class="gallery__bar" type="button" aria-label="Cozinha contemporânea com marcenaria verde"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-18.jpg" alt="" loading="lazy" draggable="false"></span></button>
-          <button class="gallery__bar" type="button" aria-label="Cozinha integrada a uma sala de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-23.jpg" alt="" loading="lazy" draggable="false"></span></button>
-          <button class="gallery__bar" type="button" aria-label="Sala integrada com sofá cinza e área de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-12.jpg" alt="" loading="lazy" draggable="false"></span></button>
-          <button class="gallery__bar" type="button" aria-label="Sala de estar com madeira natural e iluminação aconchegante"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-25.jpg" alt="" loading="lazy" draggable="false"></span></button>
-          <button class="gallery__bar" type="button" aria-label="Sala de jantar com mesa de vidro e cadeiras de madeira"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-16.jpg" alt="" loading="lazy" draggable="false"></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala integrada com sofá cinza e área de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-12.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de estar com madeira natural e iluminação aconchegante"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-25.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de jantar com mesa de vidro e cadeiras de madeira"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-16.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
+          <button class="gallery__bar" type="button" aria-label="Cozinha contemporânea com marcenaria verde"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-18.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
+          <button class="gallery__bar" type="button" aria-label="Cozinha integrada a uma sala de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-23.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala integrada com sofá cinza e área de jantar"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-12.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de estar com madeira natural e iluminação aconchegante"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-25.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
+          <button class="gallery__bar" type="button" aria-label="Sala de jantar com mesa de vidro e cadeiras de madeira"><span class="gallery__frame"><img src="./img/photo_2026-09-05_23-27-16.jpg" alt="" loading="lazy" draggable="false"><span class="gallery__hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg><span>Clique para visualizar a imagem completa</span></span></span></button>
         </div>
         <button class="gallery__arrow" type="button" data-gallery-next aria-label="Próximas imagens"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
@@ -230,6 +232,30 @@
     <p class="cart-dialog__empty" data-cart-empty>Seu carrinho está vazio.</p>
     <ul class="cart-dialog__items" data-cart-items></ul>
     <a class="cart-dialog__browse" href="#pacotes" data-cart-close>Conhecer os pacotes</a>
+  </dialog>
+
+  <dialog class="drawer" id="mobile-menu" aria-label="Menu de navegação">
+    <div class="drawer__panel">
+      <div class="drawer__top">
+        <span class="drawer__brand"><img src="./img/Logo-v1.png" alt=""><span>MERIDIANA</span></span>
+        <button class="drawer__close" type="button" data-menu-close aria-label="Fechar menu">×</button>
+      </div>
+      <nav class="drawer__nav" aria-label="Menu principal">
+        <a href="#inicio" data-menu-close style="--i:0"><span>01</span>Início</a>
+        <a href="#sobre" data-menu-close style="--i:1"><span>02</span>Sobre</a>
+        <a href="#galeria" data-menu-close style="--i:2"><span>03</span>Galeria</a>
+        <a href="#pacotes" data-menu-close style="--i:3"><span>04</span>Pacotes</a>
+        <a href="#contato" data-menu-close style="--i:4"><span>05</span>Contato</a>
+      </nav>
+      <p class="drawer__foot"><a href="mailto:contato@meridiana.com.br">contato@meridiana.com.br</a><br>Seg. a sex., 9h às 18h</p>
+    </div>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Imagem ampliada">
+    <div class="lightbox__card">
+      <img class="lightbox__image" data-lightbox-image alt="">
+      <button class="lightbox__close" type="button" data-lightbox-close aria-label="Fechar imagem">×</button>
+    </div>
   </dialog>
 
   <script src="script.js" defer></script>
